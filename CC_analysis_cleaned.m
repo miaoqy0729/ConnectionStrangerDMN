@@ -1,7 +1,7 @@
 %% Study Properties
 prefix='CC';
 datapath=uigetdir('','Choose Main Data Directory');
-addpath(genpath('/Users/gracemiumiu/Desktop/CC_Data_Analysis/NIRS/JNeuroChangeFraming_2025-02'))
+%addpath(genpath(''))
 numareas=4;
 
 %% Load data
@@ -162,10 +162,9 @@ null=false;
 
 % Run with null to get p value 
 null=true;
-y_connectRandi=y(randperm(length(y)));
-[meanAccNull, meanDevNull, null_accuracies] = basic_predict(X,y_connectRandi, 'Logistic Regression', cv_strategy, numreps, balance, null);
+[meanAccNull, meanDevNull, null_accuracies] = basic_predict(X,y, 'Logistic Regression', cv_strategy, numreps, balance, null);
 null_accuracies=sort(null_accuracies);
-pVal=(sum(null_accuracies > mean_accuracy))/numreps;
+pVal=(sum(null_accuracies >= mean_accuracy))/numreps;
 disp(['The p-value from permutation is: ', num2str(pVal)]);
 
 
